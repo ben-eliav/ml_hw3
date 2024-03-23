@@ -21,14 +21,20 @@ where the first inequality is due to the fact that the supremum of a set is grea
 Note that the $\{0,1\}$ loss $l(z_i, h)$ can be viewed as $\frac{1-h(x_i)y_i}{2}$. Plugging it into the Rademacher complexity definition, we can get:
 \begin{align*}
     R(L\circ S) &= E_\sigma \left[ \frac{1}{m}\sup_{h \in H}\sum_{i=1}^m \sigma_i l(z_i, h) \right] \\ &= E_\sigma \left[ \frac{1}{m}\sup_{h \in H}\sum_{i=1}^m \sigma_i \frac{1-h(x_i)y_i}{2} \right] \\ &= E_\sigma \left[ \frac{1}{2m}\sup_{h \in H}\sum_{i=1}^m \sigma_i - \sigma_i h(x_i)y_i \right] \\ 
-    &= \frac{1}{2m}\sum_{i=1}^mE_\sigma\left[\sigma_i\right] + E_\sigma\left[\frac{1}{2m}\sup_{h\in H}\sum_{i=1}^m -\sigma_i h(x_i)y_i\right] \\
-    &\stackrel{(*)}{=} \frac{1}{2m}\sum_{i=1}^m 0 + \frac{1}{2}E_\sigma\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)y_i\right] \\
+    &\stackrel{(*)}{=} \frac{1}{2m}\sum_{i=1}^mE_\sigma\left[\sigma_i\right] + E_\sigma\left[\frac{1}{2m}\sup_{h\in H}\sum_{i=1}^m -\sigma_i h(x_i)y_i\right] \\
+    &\stackrel{(**)}{=} \frac{1}{2m}\sum_{i=1}^m 0 + \frac{1}{2}E_\sigma\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)y_i\right] \\
     &= \frac{1}{2}E_\sigma\left[\frac{1}{m}\sup_{h\in H}\sum_{i: \, y_i=1} \sigma_i h(x_i) + \sum_{j: \, y_j\neq1} -\sigma_j h(x_j)\right] \\ 
     &= \frac{1}{2}\sum_{\sigma} P(\sigma)\left[ \frac{1}{m}\sup_{h\in H}\sum_{i: \, y_i=1} \sigma_i h(x_i) + \sum_{j: \, y_j\neq1} -\sigma_j h(x_j) \right] \\
-    &\stackrel{(**)}{=} \frac{1}{2}\sum_{\sigma} P(\sigma^-)\left[ \frac{1}{m}\sup_{h\in H}\sum_{i: \, y_i=1} \sigma^-_i h(x_i) + \sum_{j: \, y_j\neq1} \sigma^-_j h(x_j) \right] \\
+    &\stackrel{(***)}{=} \frac{1}{2}\sum_{\sigma^-} P(\sigma^-)\left[ \frac{1}{m}\sup_{h\in H}\sum_{i: \, y_i=1} \sigma^-_i h(x_i) + \sum_{j: \, y_j\neq1} \sigma^-_j h(x_j) \right] \\
     &= \frac{1}{2}\sum_{\sigma} P(\sigma)\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)\right] \\
     &= \frac{1}{2}E_0\sigma\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)\right] = \frac{1}{2}R(H \circ S)
 \end{align*}
+where $(*)$ is due to the fact that the sum on $\sigma_i$ does not depend on $h$ and thus can be extracted from the supremum.\\
+$(**)$ is due to the fact that $-\sigma_i$ is also a Rademacher random variable and thus follows the exact same distribution.\\
+To explain $(***)$, we define $\sigma$ as a sequence of $m$ Rademacher random variables. We can define $\sigma^-$ as
+a transformation on some $\sigma$ such that $\sigma^-_i = -\sigma_i$ for all $i$ such that $y_i = -1$. Because $\sigma_i$
+are i.i.d, the probability of $\sigma_i = 1$ is the same as the probability of $\sigma^-_i = -1$. Therefore, $P(\sigma) = P(\sigma^-)$.
+Also note that the transformation $\sigma \rightarrow \sigma^-$ is a bijection, so summing over all $\sigma$ is the same as summing over all $\sigma^-$.\\
 
 \section*{1.3}
 \begin{align*}
@@ -41,4 +47,5 @@ Note that the $\{0,1\}$ loss $l(z_i, h)$ can be viewed as $\frac{1-h(x_i)y_i}{2}
     &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F} \sum_{i=1}^m \sigma_i f(z_i) \right] + E_\sigma \left[ \frac{1}{m}\sup_{g \in G} \sum_{i=1}^m \sigma_i g(z_i) \right] \\
     &= R(F \circ S) + R(G \circ S)
 \end{align*}
+
 \end{document}
