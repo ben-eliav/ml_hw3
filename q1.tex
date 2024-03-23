@@ -27,7 +27,18 @@ Note that the $\{0,1\}$ loss $l(z_i, h)$ can be viewed as $\frac{1-h(x_i)y_i}{2}
     &= \frac{1}{2}\sum_{\sigma} P(\sigma)\left[ \frac{1}{m}\sup_{h\in H}\sum_{i: \, y_i=1} \sigma_i h(x_i) + \sum_{j: \, y_j\neq1} -\sigma_j h(x_j) \right] \\
     &\stackrel{(**)}{=} \frac{1}{2}\sum_{\sigma} P(\sigma^-)\left[ \frac{1}{m}\sup_{h\in H}\sum_{i: \, y_i=1} \sigma^-_i h(x_i) + \sum_{j: \, y_j\neq1} \sigma^-_j h(x_j) \right] \\
     &= \frac{1}{2}\sum_{\sigma} P(\sigma)\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)\right] \\
-    &= \frac{1}{2}E_\sigma\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)\right] = \frac{1}{2}R(H \circ S)
+    &= \frac{1}{2}E_0\sigma\left[\frac{1}{m}\sup_{h\in H}\sum_{i=1}^m \sigma_i h(x_i)\right] = \frac{1}{2}R(H \circ S)
 \end{align*}
 
+\section*{1.3}
+\begin{align*}
+    R(\hat{F} \circ S) &= E_\sigma \left[ \frac{1}{m}\sup_{f \in \hat{F}}\sum_{i=1}^m \sigma_i f(z_i) \right] \\
+    &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F, g \in G} \sum_{i=1}^m \sigma_i f(z_i) + \sigma_i g(z_i) \right] \\
+    &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F, g \in G} \sum_{i=1}^m \sigma_i f(z_i) + \sum_{i=1}^m \sigma_i g(z_i) \right] \\
+    &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F} \left(\sup_{g \in G} \sum_{i=1}^m \sigma_i f(z_i) + \sum_{i=1}^m \sigma_i g(z_i)\right) \right] \\
+    &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F} \left(\sum_{i=1}^m \sigma_i f(z_i) + \sup_{g \in G} \sum_{i=1}^m \sigma_i g(z_i) \right)\right] \\
+    &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F} \sum_{i=1}^m \sigma_i f(z_i) + \frac{1}{m}\sup_{g \in G} \sum_{i=1}^m \sigma_i g(z_i) \right] \\
+    &= E_\sigma \left[ \frac{1}{m}\sup_{f \in F} \sum_{i=1}^m \sigma_i f(z_i) \right] + E_\sigma \left[ \frac{1}{m}\sup_{g \in G} \sum_{i=1}^m \sigma_i g(z_i) \right] \\
+    &= R(F \circ S) + R(G \circ S)
+\end{align*}
 \end{document}
